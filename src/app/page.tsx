@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FileText, Search, AlertCircle, FilePlus, Zap, Scale, FileDiff, X, CheckCircle, Lock, Shield, Server, Zap as ZapIcon, Key } from "lucide-react";
 import { processUploadedDocument, askQuestion, scanDocument, compareDocs } from "@/actions/document";
 import { DocumentChunk } from "@/lib/pdf-parser";
@@ -20,7 +20,19 @@ export default function Home() {
   type ModalType = "FEATURES" | "PRICING" | "ENTERPRISE" | "API_DOCS" | "LOGIN" | null;
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [isClosing, setIsClosing] = useState(false);
+  
+  const [showSplash, setShowSplash] = useState(true);
+  const [splashFading, setSplashFading] = useState(false);
 
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setSplashFading(true);
+    }, 2800);
+    const timer2 = setTimeout(() => {
+      setShowSplash(false);
+    }, 3600);
+    return () => { clearTimeout(timer1); clearTimeout(timer2); };
+  }, []);
   const closeModal = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -167,7 +179,24 @@ export default function Home() {
   const activeChunks = activeLeftTab === "A" ? docAChunks : docBChunks;
 
   return (
-    <div className="h-screen flex flex-col bg-paper text-ink font-sans selection:bg-ink/20">
+    <>
+      {showSplash && (
+        <div className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#fdfbf7] transition-opacity duration-700 ease-in-out ${splashFading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <img src="/banner_final.jpg" alt="Vagram Splash" className="w-full h-full object-cover opacity-30" style={{ animation: 'splashZoomOut 3s ease-out forwards' }} />
+          </div>
+          <div className="z-10 flex flex-col items-center text-center">
+            <h1 className="text-6xl md:text-8xl font-black text-ink mb-4" style={{ animation: 'logoReveal 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
+              VAGRAM
+            </h1>
+            <p className="text-xl md:text-2xl uppercase tracking-[0.2em] font-medium text-ink/80" style={{ animation: 'subtitleReveal 2s ease-out 0.5s both' }}>
+              Legal AI Workspace
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className={`h-screen flex flex-col bg-paper text-ink font-sans selection:bg-ink/20 transition-opacity duration-1000 ${showSplash && !splashFading ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 h-screen'}`}>
       
       {/* SaaS Header */}
       <header className="flex-none sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/10 px-6 py-4 flex items-center justify-between animate-fade-in shadow-sm">
@@ -757,5 +786,6 @@ Content-Type: multipart/form-data
           </div>
       )}
     </div>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 # ⚖️ Legal AI Workspace
 
 <div align="center">
-  <img src="./public/banner.jpg" alt="Legal AI Workspace - Minimal Sketch Banner" style="border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+  <img src="./public/banner_final.jpg" alt="Legal AI Workspace - Minimal Sketch Banner" style="border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
 </div>
 
 <div align="center">

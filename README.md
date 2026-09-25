@@ -1,8 +1,22 @@
 # ⚖️ Legal AI Workspace
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC) ![Google Gemini API](https://img.shields.io/badge/Google_Gemini-API-4285F4)
+<div align="center">
+  <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=2000" alt="Legal AI Workspace Banner" style="border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+</div>
 
-A highly advanced, scalable AI SaaS platform for enterprise legal teams. Analyze contracts, extract risk profiles, and compare clauses with pinpoint paragraph-level citations—guaranteed zero hallucinations. 
+<div align="center">
+  
+  ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge) 
+  ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge) 
+  ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?style=for-the-badge) 
+  ![Google Gemini API](https://img.shields.io/badge/Google_Gemini-API-4285F4?style=for-the-badge)
+  ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+
+</div>
+
+<br />
+
+> **A highly advanced, scalable AI SaaS platform for enterprise legal teams.** Analyze contracts, extract risk profiles, and compare clauses with pinpoint paragraph-level citations—guaranteed zero hallucinations.
 
 ---
 

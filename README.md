@@ -1,5 +1,4 @@
-# ⚖️ Legal AI Workspace
-
+# ⚖️ Legal AI
 <div align="center">
   <img src="./public/banner_final.jpg" alt="Legal AI Workspace - Minimal Sketch Banner" style="border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
 </div>
@@ -33,7 +32,7 @@
 
 ## 📖 Overview
 
-The **Legal AI Workspace** is an institutional-grade platform built on Google's Gemini models (`gemini-1.5-flash`). It is designed to process complex contracts and legal documents while strictly enforcing **grounding**. It will only answer based on the uploaded text and explicitly cites the exact `[ID: ¶...]` used to generate the answer, eliminating external knowledge hallucination.
+The **Legal AI** is an institutional-grade platform built on Google's Gemini models (`gemini-1.5-flash`). It is designed to process complex contracts and legal documents while strictly enforcing **grounding**. It will only answer based on the uploaded text and explicitly cites the exact `[ID: ¶...]` used to generate the answer, eliminating external knowledge hallucination.
 
 This repository contains the complete frontend UI, interactive SaaS overlays, and the secure backend actions required to run the platform.
 

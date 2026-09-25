@@ -27,10 +27,10 @@ export default function Home() {
   useEffect(() => {
     const timer1 = setTimeout(() => {
       setSplashFading(true);
-    }, 2800);
+    }, 2500);
     const timer2 = setTimeout(() => {
       setShowSplash(false);
-    }, 3600);
+    }, 3200);
     return () => { clearTimeout(timer1); clearTimeout(timer2); };
   }, []);
   const closeModal = () => {
@@ -181,17 +181,36 @@ export default function Home() {
   return (
     <>
       {showSplash && (
-        <div className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#fdfbf7] transition-opacity duration-700 ease-in-out ${splashFading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <img src="/banner_final.jpg" alt="Vagram Splash" className="w-full h-full object-cover opacity-30" style={{ animation: 'splashZoomOut 3s ease-out forwards' }} />
+        <div className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#FDFBF7] transition-all duration-700 ease-in-out ${splashFading ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}>
+          {/* Subtle Ambient Halo */}
+          <div className="absolute w-72 h-72 rounded-full bg-ink/[0.03] blur-2xl pointer-events-none animate-pulse" />
+
+          {/* Centered Small Architectural Emblem */}
+          <div 
+            className="relative mb-3 flex items-center justify-center"
+            style={{ animation: 'emblemEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
+          >
+            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 flex items-center justify-center">
+              <img 
+                src="/banner_final.jpg" 
+                alt="Legal AI Emblem" 
+                className="w-full h-full object-contain mix-blend-multiply select-none pointer-events-none" 
+              />
+            </div>
           </div>
-          <div className="z-10 flex flex-col items-center text-center">
-            <h1 className="text-6xl md:text-8xl font-black text-ink mb-4" style={{ animation: 'logoReveal 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
-              VAGRAM
+
+          {/* Animated Inward "Legal AI" Text */}
+          <div className="flex flex-col items-center text-center px-4">
+            <h1 
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-ink uppercase tracking-tight select-none"
+              style={{ animation: 'legalAiInwards 2s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
+            >
+              Legal AI
             </h1>
-            <p className="text-xl md:text-2xl uppercase tracking-[0.2em] font-medium text-ink/80" style={{ animation: 'subtitleReveal 2s ease-out 0.5s both' }}>
-              Legal AI Workspace
-            </p>
+            <div 
+              className="h-[2px] bg-ink/40 mt-3 rounded-full"
+              style={{ animation: 'lineExpand 1.5s ease-out 0.4s both' }}
+            />
           </div>
         </div>
       )}

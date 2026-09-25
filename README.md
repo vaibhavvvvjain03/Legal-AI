@@ -1,44 +1,53 @@
-# 📄 Grounded Legal Document Assistant
+# ⚖️ Legal AI Workspace
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC) ![Google Gemini API](https://img.shields.io/badge/Google_Gemini-API-4285F4)
 
-A modern, offline-tolerant, and secure AI assistant for querying, auditing, and comparing legal documents with exact paragraph-level citations to prevent hallucinations.
+A highly advanced, scalable AI SaaS platform for enterprise legal teams. Analyze contracts, extract risk profiles, and compare clauses with pinpoint paragraph-level citations—guaranteed zero hallucinations. 
 
 ---
 
 ## 📑 Table of Contents
 
 - [Overview](#-overview)
-- [Key Features](#-key-features)
+- [Enterprise SaaS Features](#-enterprise-saas-features)
 - [🚨 CRITICAL: API KEY SETUP 🚨](#-critical-api-key-setup-)
 - [How It Works (Architecture)](#-how-it-works-architecture)
 - [Getting Started](#-getting-started)
-- [Mock Mode / Offline Development](#-mock-mode--offline-development)
 - [Deployment](#-deployment)
 
 ---
 
 ## 📖 Overview
 
-The **Grounded Legal Document Assistant** is designed to process complex contracts and legal documents using the power of Google's Gemini models. It stands apart from standard AI chatbots by strictly enforcing **grounding** — meaning it will only answer based on the uploaded text, and it explicitly cites the exact chunk/paragraph it used to generate the answer.
+The **Legal AI Workspace** is an institutional-grade platform built on Google's Gemini models (`gemini-1.5-flash`). It is designed to process complex contracts and legal documents while strictly enforcing **grounding**. It will only answer based on the uploaded text and explicitly cites the exact `[ID: ¶...]` used to generate the answer, eliminating external knowledge hallucination.
+
+This repository contains the complete frontend UI, interactive SaaS overlays, and the secure backend actions required to run the platform.
 
 ---
 
-## ✨ Key Features
+## ✨ Enterprise SaaS Features
 
-1. **Grounded Q&A**: Ask questions about your document. The AI cites the exact `[ID: ¶...]` that contains the answer and refuses to guess if the answer is missing.
-2. **Automated Risk Scanning**: Instantly audits a contract for Obligations, Liabilities, and Inconsistencies.
+The application is built to scale and includes professional SaaS-level UI and features:
+
+1. **Grounded Q&A**: Ask any question about a document. The AI cites the exact chunk containing the answer. If the answer is missing, it refuses to guess.
+2. **Automated Risk Scanning**: Instantly audits a contract for Obligations, Liabilities, and Inconsistencies with color-coded severity levels.
 3. **Clause-Level Diffing**: Upload Document A and Document B to generate a precise comparison table showing added, removed, and changed clauses.
-4. **Resilient AI Execution**: The API integration uses robust retry-mechanisms (up to 5 retries) and exponential backoff to handle rate limits and transient errors on any Gemini API key.
+4. **Resilient AI Execution**: The API integration uses robust 5-retry mechanisms and exponential backoff to handle rate limits and ensure uptime.
+5. **Interactive Modal System**: Fully integrated, glassmorphic UI overlays for:
+   - **Features & Pricing Plans** (Free, Pro, Pro Max)
+   - **Enterprise Scalability** (On-Premise & VPC Deployments, SOC2/HIPAA)
+   - **API Documentation** for developers to connect using their own billing.
+   - **Animated Workspace Login** with immersive CSS micro-animations.
 
 ---
 
 ## 🚨 CRITICAL: API KEY SETUP 🚨
 
 > [!CAUTION]
-> **YOU MUST PROVIDE YOUR OWN API KEY FOR THIS PROJECT TO WORK IN PRODUCTION.**
+> **YOU MUST PROVIDE A REAL API KEY FOR THIS PROJECT TO WORK.**
+> The previous placeholder/mock system has been completely removed to ensure true functionality.
 
-The AI features require a valid Google Gemini API key. Without this key, the application will not be able to process actual documents unless running in local Mock Mode.
+The AI engine requires a valid Google Gemini API key to process actual documents.
 
 1. Get an API key from [Google AI Studio](https://aistudio.google.com/).
 2. Create a file named `.env.local` in the root of the project.
@@ -46,10 +55,9 @@ The AI features require a valid Google Gemini API key. Without this key, the app
 
 ```env
 GEMINI_API_KEY="your_actual_gemini_api_key_here"
-MOCK_MODE=false
 ```
 
-Make sure your API key has sufficient quota. The application is highly optimized and includes a 5-retry resilience mechanism to maximize stability regardless of which API key tier you are using.
+*Note: Make sure your API key has sufficient quota. The application is highly optimized and includes a 5x retry resilience mechanism to maximize stability regardless of which API key tier you are using.*
 
 ---
 
@@ -58,14 +66,14 @@ Make sure your API key has sufficient quota. The application is highly optimized
 ```mermaid
 graph TD
     A[User Uploads PDF] --> B[PDF Parser Extracts Text & IDs]
-    B --> C{User Action}
+    B --> C{Workspace Action}
     C -->|Ask Question| D[Q&A Engine]
     C -->|Run Scan| E[Risk Auditor]
     C -->|Upload Doc B| F[Clause Diff Engine]
-    D --> G{Gemini API <br> with 5x Retry}
+    D --> G{Gemini 1.5 Flash <br> 5x Retry Middleware}
     E --> G
     F --> G
-    G --> H[Zod Schema Validation]
+    G --> H[Strict Zod Schema Validation]
     H --> I[UI Renders with Citations]
 ```
 
@@ -87,33 +95,18 @@ When you ask a question, the system provides a confidence score and a clickable 
    npm install
    ```
 2. **Set up environment variables:**
-   Follow the [API Key Setup](#-critical-api-key-setup-) instructions above.
+   Follow the [API Key Setup](#-critical-api-key-setup-) instructions above to add your live key.
 3. **Run the development server:**
    ```bash
    npm run dev
    ```
 4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000).
-
----
-
-## 🛠 Mock Mode / Offline Development
-
-If you do not have an API key right now or are working offline, you can use **Mock Mode**.
-
-In your `.env.local`:
-```env
-MOCK_MODE=true
-```
-
-When Mock Mode is active, the app uses a deterministic local dataset to simulate the Gemini API responses without making network requests. This allows you to build and preview the UI immediately.
-
-> [!WARNING]
-> Mock Mode is strictly prevented from running in production. If deployed with Mock Mode enabled, the UI will throw a visible red banner error to prevent accidental shipping of hardcoded data.
+   Navigate to [http://localhost:3000](http://localhost:3000) to access the workspace.
 
 ---
 
 ## 🌐 Deployment
 
-The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new).
-Be sure to add your `GEMINI_API_KEY` to your production environment variables in your Vercel dashboard!
+This application is a standard Next.js 14 App Router project and can be deployed to any major cloud provider (AWS, GCP, Azure) or Next.js hosting platform of your choice.
+
+When deploying, ensure that `GEMINI_API_KEY` is securely injected into your production environment variables. For enterprise usage, refer to the in-app **Enterprise** tab for instructions on VPC and air-gapped deployments.

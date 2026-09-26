@@ -6,6 +6,14 @@ export interface DocumentChunk {
   text: string;
 }
 
+/**
+ * Parses a PDF buffer and chunks the text into readable paragraphs or clauses.
+ * Handles unstructured large blocks of text by artificially splitting them to ensure
+ * the AI receives appropriately sized context windows.
+ * 
+ * @param pdfBuffer - The raw buffer of the uploaded PDF file.
+ * @returns An array of DocumentChunk objects containing the text.
+ */
 export async function parsePdfToChunks(pdfBuffer: Buffer): Promise<DocumentChunk[]> {
   const data = await pdfParse(pdfBuffer);
   const rawText = data.text;

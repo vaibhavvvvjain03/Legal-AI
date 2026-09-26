@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { FileText, Search, AlertCircle, FilePlus, Zap, Scale, FileDiff, X, CheckCircle, Lock, Shield, Server, Zap as ZapIcon, Key } from "lucide-react";
 import { processUploadedDocument, askQuestion, scanDocument, compareDocs } from "@/actions/document";
 import { DocumentChunk } from "@/lib/pdf-parser";
@@ -190,11 +191,13 @@ export default function Home() {
             className="relative mb-3 flex items-center justify-center"
             style={{ animation: 'emblemEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
           >
-            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 flex items-center justify-center">
-              <img 
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56">
+              <Image 
                 src="/banner_final.jpg" 
                 alt="Legal AI Emblem" 
-                className="w-full h-full object-contain mix-blend-multiply select-none pointer-events-none" 
+                fill
+                className="object-contain mix-blend-multiply select-none pointer-events-none" 
+                priority
               />
             </div>
           </div>
@@ -716,7 +719,7 @@ export default function Home() {
                        <Server size={32} className="text-citation" />
                     </div>
                     <h3 className="text-3xl font-black text-ink mb-4 tracking-tight">Enterprise Grade Scalability</h3>
-                    <p className="text-lg text-ink/70 max-w-3xl mx-auto leading-relaxed">How do we scale to big enterprises? By offering ultimate control, unparalleled security, and infrastructure built for the world's largest organizations and law firms.</p>
+                    <p className="text-lg text-ink/70 max-w-3xl mx-auto leading-relaxed">How do we scale to big enterprises? By offering ultimate control, unparalleled security, and infrastructure built for the world&apos;s largest organizations and law firms.</p>
                   </div>
                   <div className="bg-ink text-paper p-10 rounded-3xl shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-citation opacity-20 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>

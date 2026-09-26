@@ -224,7 +224,7 @@ export default function Home() {
       <header className="flex-none sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/10 px-6 py-4 flex items-center justify-between animate-fade-in shadow-sm">
         <div className="flex items-center gap-2 text-ink hover:opacity-80 transition-opacity cursor-pointer">
           <div className="bg-ink text-paper p-1.5 rounded-md" aria-hidden="true">
-            <Scale size={20} />
+            <Scale aria-hidden="true" size={20} />
           </div>
           <span className="font-bold text-xl tracking-tight">Legal AI</span>
         </div>
@@ -303,7 +303,7 @@ export default function Home() {
         <div className="flex-1 overflow-y-auto p-8">
           {activeChunks.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-ink/50 space-y-4">
-              <FileText size={48} />
+              <FileText aria-hidden="true" size={48} />
               <h2 className="text-xl font-medium">Upload {activeLeftTab === "A" ? "Primary Document" : "Comparison Document"}</h2>
               <label htmlFor="main-upload" className="cursor-pointer bg-ink text-paper px-6 py-2 hover:bg-ink/90 transition-colors focus-within:ring-2 focus-within:ring-obligation focus-within:ring-offset-2 focus-within:ring-offset-paper rounded font-medium">
                 <input id="main-upload" type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, activeLeftTab === "B")} disabled={isUploading} aria-label={activeLeftTab === "A" ? "Upload Primary Document" : "Upload Comparison Document"} />
@@ -362,13 +362,13 @@ export default function Home() {
               onClick={() => setActiveRightTab("SCAN")}
               className={`text-sm font-medium uppercase tracking-wider transition-colors flex items-center gap-1 ${activeRightTab === "SCAN" ? 'text-ink' : 'text-ink/40 hover:text-ink/80'}`}
             >
-              <Zap size={14} /> Scan
+              <Zap aria-hidden="true" size={14} /> Scan
             </button>
             <button 
               onClick={() => setActiveRightTab("COMPARE")}
               className={`text-sm font-medium uppercase tracking-wider transition-colors flex items-center gap-1 ${activeRightTab === "COMPARE" ? 'text-ink' : 'text-ink/40 hover:text-ink/80'}`}
             >
-              <Scale size={14} /> Compare
+              <Scale aria-hidden="true" size={14} /> Compare
             </button>
           </div>
         </header>
@@ -381,7 +381,7 @@ export default function Home() {
               <div className="flex-1 flex flex-col gap-4 pb-4 overflow-y-auto pr-2 scroll-smooth">
                 {chatHistory.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full opacity-50 text-center mt-12">
-                    <Search size={48} className="mb-4 text-ink/30" />
+                    <Search aria-hidden="true" size={48} className="mb-4 text-ink/30" />
                     <p className="text-sm">Ask a question about the document to begin.</p>
                   </div>
                 ) : (
@@ -399,7 +399,7 @@ export default function Home() {
                             </div>
                           ) : msg.answer?.notFound ? (
                             <div className="flex items-start gap-3 text-ink" aria-live="polite">
-                              <AlertCircle className="shrink-0 mt-0.5 text-risk" size={16} />
+                              <AlertCircle aria-hidden="true" className="shrink-0 mt-0.5 text-risk" size={16} />
                               <div>
                                 <h3 className="font-medium text-risk mb-1 text-xs">Not Addressed in Document</h3>
                                 <p className="opacity-80">The document does not contain an answer to this question.</p>
@@ -593,7 +593,7 @@ export default function Home() {
       <footer className="flex-none border-t border-ink/10 bg-paper/50 py-6 px-6 mt-auto relative">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between text-xs font-medium text-ink/60">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <Scale size={14} className="opacity-70" />
+            <Scale aria-hidden="true" size={14} className="opacity-70" />
             <p>© {new Date().getFullYear()} Legal AI, Inc. All rights reserved.</p>
           </div>
           <div className="flex gap-6">
@@ -606,9 +606,9 @@ export default function Home() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-[200] animate-fade-in-up">
+        <div role="alert" aria-live="assertive" className="fixed bottom-6 right-6 z-[200] animate-fade-in-up">
           <div className="bg-ink text-paper px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 font-medium text-sm border border-white/10">
-            <AlertCircle size={16} className="text-citation" />
+            <AlertCircle aria-hidden="true" size={16} className="text-citation" />
             {toastMessage}
           </div>
         </div>
@@ -626,7 +626,7 @@ export default function Home() {
           <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-md border-b border-ink/10 px-6 py-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="bg-ink text-paper p-2 rounded-lg shadow-sm" aria-hidden="true">
-                <Scale size={24} className="animate-pulse" />
+                <Scale aria-hidden="true" size={24} className="animate-pulse" />
               </div>
               <h2 id="modal-title" className="text-2xl font-black text-ink tracking-tight">
                 {activeModal === "FEATURES" && "Platform Features"}
@@ -651,22 +651,22 @@ export default function Home() {
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="p-8 border border-ink/10 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                      <Search className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
+                      <Search aria-hidden="true" className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
                       <h4 className="text-xl font-bold mb-3">Grounded Q&A</h4>
                       <p className="text-ink/70 leading-relaxed">Ask any question about your contracts. We guarantee zero hallucinations by strictly citing exact chunks from the uploaded text.</p>
                     </div>
                     <div className="p-8 border border-ink/10 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                      <ZapIcon className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
+                      <ZapIcon aria-hidden="true" className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
                       <h4 className="text-xl font-bold mb-3">Instant Risk Scanning</h4>
                       <p className="text-ink/70 leading-relaxed">Automatically identify liabilities, severe penalties, and contradicting terms across massive documents in seconds.</p>
                     </div>
                     <div className="p-8 border border-ink/10 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                      <FileDiff className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
+                      <FileDiff aria-hidden="true" className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
                       <h4 className="text-xl font-bold mb-3">Clause-Level Diff</h4>
                       <p className="text-ink/70 leading-relaxed">Compare multiple versions of a document. We instantly flag added, removed, and modified clauses with color-coded severity.</p>
                     </div>
                     <div className="p-8 border border-ink/10 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                      <Shield className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
+                      <Shield aria-hidden="true" className="text-ink mb-6 bg-ink/5 p-3 rounded-xl w-14 h-14" />
                       <h4 className="text-xl font-bold mb-3">Zero-Data Retention</h4>
                       <p className="text-ink/70 leading-relaxed">Your confidential files are processed entirely in-memory. Nothing is permanently stored or used to train public models.</p>
                     </div>
@@ -686,9 +686,9 @@ export default function Home() {
                       <h4 className="text-xl font-bold mb-2">Free Tier</h4>
                       <div className="text-4xl font-black mb-6">$0<span className="text-base font-normal text-ink/50">/mo</span></div>
                       <ul className="space-y-4 mb-8 flex-1 text-sm font-medium">
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> 5 Document Scans / mo</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> Standard Q&A</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> 10MB file limit</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> 5 Document Scans / mo</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> Standard Q&A</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> 10MB file limit</li>
                       </ul>
                       <button className="w-full py-3.5 rounded-xl border border-ink/20 text-ink font-bold hover:border-ink hover:bg-ink/5 transition-colors">Start Free</button>
                     </div>
@@ -698,10 +698,10 @@ export default function Home() {
                       <h4 className="text-xl font-bold mb-2 text-paper/90">Pro</h4>
                       <div className="text-4xl font-black mb-6">$49<span className="text-base font-normal opacity-70">/mo</span></div>
                       <ul className="space-y-4 mb-8 flex-1 text-sm font-medium">
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-citation shrink-0" /> 500 Document Scans / mo</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-citation shrink-0" /> Clause-Level Diffing</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-citation shrink-0" /> 100MB file limit</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-citation shrink-0" /> Priority Support</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-citation shrink-0" /> 500 Document Scans / mo</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-citation shrink-0" /> Clause-Level Diffing</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-citation shrink-0" /> 100MB file limit</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-citation shrink-0" /> Priority Support</li>
                       </ul>
                       <button className="w-full py-3.5 rounded-xl bg-paper text-ink font-bold hover:bg-paper/90 transition-colors shadow-sm">Upgrade to Pro</button>
                     </div>
@@ -710,10 +710,10 @@ export default function Home() {
                       <h4 className="text-xl font-bold mb-2">Pro Max</h4>
                       <div className="text-4xl font-black mb-6">$199<span className="text-base font-normal text-ink/50">/mo</span></div>
                       <ul className="space-y-4 mb-8 flex-1 text-sm font-medium">
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> Unlimited Scans</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> API Access</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> Custom integrations</li>
-                        <li className="flex gap-3 items-center"><CheckCircle size={18} className="text-verified shrink-0" /> Team collaboration</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> Unlimited Scans</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> API Access</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> Custom integrations</li>
+                        <li className="flex gap-3 items-center"><CheckCircle aria-hidden="true" size={18} className="text-verified shrink-0" /> Team collaboration</li>
                       </ul>
                       <button className="w-full py-3.5 rounded-xl border border-ink/20 text-ink font-bold hover:border-ink hover:bg-ink/5 transition-colors">Get Pro Max</button>
                     </div>
@@ -725,7 +725,7 @@ export default function Home() {
                 <div className="space-y-8">
                   <div className="text-center mb-12">
                     <div className="inline-block bg-citation/20 p-3 rounded-full mb-4">
-                       <Server size={32} className="text-citation" />
+                       <Server aria-hidden="true" size={32} className="text-citation" />
                     </div>
                     <h3 className="text-3xl font-black text-ink mb-4 tracking-tight">Enterprise Grade Scalability</h3>
                     <p className="text-lg text-ink/70 max-w-3xl mx-auto leading-relaxed">How do we scale to big enterprises? By offering ultimate control, unparalleled security, and infrastructure built for the world&apos;s largest organizations and law firms.</p>
@@ -734,12 +734,12 @@ export default function Home() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-citation opacity-20 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
                     <div className="grid md:grid-cols-2 gap-12 relative z-10">
                       <div>
-                        <Server className="mb-6 text-citation" size={40} />
+                        <Server aria-hidden="true" className="mb-6 text-citation" size={40} />
                         <h4 className="text-2xl font-bold mb-4">On-Premise & VPC Deployments</h4>
                         <p className="text-paper/80 leading-relaxed text-lg">For massive companies and government agencies, we offer fully air-gapped deployments. Run the Legal AI engine entirely within your own Virtual Private Cloud (AWS, GCP, Azure). Zero data leaves your network.</p>
                       </div>
                       <div>
-                        <Lock className="mb-6 text-citation" size={40} />
+                        <Lock aria-hidden="true" className="mb-6 text-citation" size={40} />
                         <h4 className="text-2xl font-bold mb-4">SOC2 & HIPAA Compliant</h4>
                         <p className="text-paper/80 leading-relaxed text-lg">Every major scalability requirement is met out-of-the-box. We integrate seamlessly with your SSO (Okta, Azure AD, Ping), provide immutable audit logs, and guarantee 99.99% uptime SLAs.</p>
                       </div>
@@ -765,7 +765,7 @@ export default function Home() {
                     <div className="bg-white p-8 rounded-2xl border border-ink/10 shadow-sm">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="bg-ink/5 p-2 rounded-lg">
-                          <Key className="text-ink" size={24} />
+                          <Key aria-hidden="true" className="text-ink" size={24} />
                         </div>
                         <h4 className="text-xl font-bold">1. Authentication (Bring Your Own Key)</h4>
                       </div>
@@ -776,7 +776,7 @@ X-Legal-Model: gemini-1.5-flash`}</code></pre>
                     <div className="bg-white p-8 rounded-2xl border border-ink/10 shadow-sm">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="bg-ink/5 p-2 rounded-lg">
-                          <FilePlus className="text-ink" size={24} />
+                          <FilePlus aria-hidden="true" className="text-ink" size={24} />
                         </div>
                         <h4 className="text-xl font-bold">2. Upload & Scan Endpoint</h4>
                       </div>
@@ -798,7 +798,7 @@ Content-Type: multipart/form-data
                     <div className="absolute inset-0 bg-ink rounded-full animate-ping opacity-10 scale-150 duration-1000"></div>
                     <div className="absolute inset-0 bg-citation rounded-full animate-pulse opacity-20 scale-125"></div>
                     <div className="bg-ink text-paper p-10 rounded-full shadow-2xl relative z-10 transform hover:rotate-12 transition-transform duration-500">
-                      <Scale size={80} className="animate-pulse" />
+                      <Scale aria-hidden="true" size={80} className="animate-pulse" />
                     </div>
                   </div>
                   <h3 className="text-5xl md:text-6xl font-black text-ink mb-8 tracking-tight">Legal AI Workspace</h3>

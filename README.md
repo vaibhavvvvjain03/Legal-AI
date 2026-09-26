@@ -56,11 +56,10 @@ The application is built to scale and includes professional SaaS-level UI and fe
 
 ## 🚨 CRITICAL: API KEY SETUP 🚨
 
-> [!CAUTION]
-> **YOU MUST PROVIDE A REAL API KEY FOR THIS PROJECT TO WORK.**
-> The previous placeholder/mock system has been completely removed to ensure true functionality.
-
-The AI engine requires a valid Google Gemini API key to process actual documents.
+> [!NOTE]
+> **Live Demo:** The live production deployment of this application is already configured with a working API key and is fully functional out of the box.
+>
+> **Local Development:** If you clone this repository to run it locally, you **must provide your own API key** for the AI engine to process documents.
 
 1. Get an API key from [Google AI Studio](https://aistudio.google.com/).
 2. Create a file named `.env.local` in the root of the project.

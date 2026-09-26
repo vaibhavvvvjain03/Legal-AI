@@ -42,6 +42,15 @@ export const AnswerSchema = z.object({
 });
 export type GroundedAnswer = z.infer<typeof AnswerSchema>;
 
+/**
+ * Sends a context-bounded question to the Gemini model.
+ * The model is instructed to answer ONLY using the provided chunks and will return
+ * structured JSON including citations or a 'notFound' flag.
+ *
+ * @param question - The query string.
+ * @param chunks - Array of document chunks to use as grounding context.
+ * @returns A structured GroundedAnswer.
+ */
 export async function askGroundedQuestion(
   question: string,
   chunks: DocumentChunk[]
@@ -122,6 +131,13 @@ export const ScanResultSchema = z.object({
 });
 export type ScanResult = z.infer<typeof ScanResultSchema>;
 
+/**
+ * Scans a document's chunks to automatically identify risks, obligations, and inconsistencies.
+ * The model acts as a legal auditor and returns a list of flagged clauses.
+ *
+ * @param chunks - The document chunks to audit.
+ * @returns A structured ScanResult containing flagged items.
+ */
 export async function scanDocumentForRisks(chunks: DocumentChunk[]): Promise<ScanResult> {
   if (getIsMockMode()) {
     return {
@@ -173,6 +189,14 @@ export const CompareResultSchema = z.object({
 });
 export type CompareResult = z.infer<typeof CompareResultSchema>;
 
+/**
+ * Compares two documents (base and revised) to find added, removed, or changed clauses.
+ * Generates a structured diff output with citations for both documents.
+ *
+ * @param chunksA - Baseline document chunks.
+ * @param chunksB - Revised document chunks.
+ * @returns A structured CompareResult.
+ */
 export async function compareDocuments(
   chunksA: DocumentChunk[],
   chunksB: DocumentChunk[]

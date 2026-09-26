@@ -223,26 +223,26 @@ export default function Home() {
       {/* SaaS Header */}
       <header className="flex-none sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/10 px-6 py-4 flex items-center justify-between animate-fade-in shadow-sm">
         <div className="flex items-center gap-2 text-ink hover:opacity-80 transition-opacity cursor-pointer">
-          <div className="bg-ink text-paper p-1.5 rounded-md">
+          <div className="bg-ink text-paper p-1.5 rounded-md" aria-hidden="true">
             <Scale size={20} />
           </div>
           <span className="font-bold text-xl tracking-tight">Legal AI</span>
         </div>
         
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-ink/70">
-          <a href="#" onClick={(e) => { e.preventDefault(); setActiveModal("FEATURES"); }} className="hover:text-ink transition-colors relative group">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-ink/70" aria-label="Main Navigation">
+          <button onClick={() => setActiveModal("FEATURES")} className="hover:text-ink transition-colors relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink">
             Features
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ink transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#" onClick={(e) => { e.preventDefault(); setActiveModal("PRICING"); }} className="hover:text-ink transition-colors relative group">
+          </button>
+          <button onClick={() => setActiveModal("PRICING")} className="hover:text-ink transition-colors relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink">
             Pricing
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ink transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#" onClick={(e) => { e.preventDefault(); setActiveModal("ENTERPRISE"); }} className="hover:text-ink transition-colors relative group">
+          </button>
+          <button onClick={() => setActiveModal("ENTERPRISE")} className="hover:text-ink transition-colors relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink">
             Enterprise
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ink transition-all group-hover:w-full"></span>
-          </a>
-          <button onClick={() => setActiveModal("API_DOCS")} className="border border-ink text-ink px-3 py-1 font-semibold rounded-sm hover:bg-ink hover:text-paper transition-all">
+          </button>
+          <button onClick={() => setActiveModal("API_DOCS")} className="border border-ink text-ink px-3 py-1 font-semibold rounded-sm hover:bg-ink hover:text-paper transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink">
             API Docs
           </button>
         </nav>
@@ -285,16 +285,16 @@ export default function Home() {
           </div>
           
           <div className="flex gap-3">
-            <label className="cursor-pointer flex items-center gap-1 text-sm text-ink/60 hover:text-ink transition-colors">
-              <FilePlus size={16} />
+            <label htmlFor="upload-a" className="cursor-pointer flex items-center gap-1 text-sm text-ink/60 hover:text-ink transition-colors focus-within:ring-2 focus-within:ring-ink rounded px-2">
+              <FilePlus size={16} aria-hidden="true" />
               <span>Replace A</span>
-              <input type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, false)} disabled={isUploading} />
+              <input id="upload-a" type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, false)} disabled={isUploading} aria-label="Upload Primary Document" />
             </label>
             {docAChunks.length > 0 && (
-              <label className="cursor-pointer flex items-center gap-1 text-sm text-ink/60 hover:text-ink transition-colors">
-                <FileDiff size={16} />
+              <label htmlFor="upload-b" className="cursor-pointer flex items-center gap-1 text-sm text-ink/60 hover:text-ink transition-colors focus-within:ring-2 focus-within:ring-ink rounded px-2">
+                <FileDiff size={16} aria-hidden="true" />
                 <span>Upload B (Compare)</span>
-                <input type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, true)} disabled={isUploading} />
+                <input id="upload-b" type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, true)} disabled={isUploading} aria-label="Upload Comparison Document" />
               </label>
             )}
           </div>
@@ -305,8 +305,8 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center h-full text-ink/50 space-y-4">
               <FileText size={48} />
               <h2 className="text-xl font-medium">Upload {activeLeftTab === "A" ? "Primary Document" : "Comparison Document"}</h2>
-              <label className="cursor-pointer bg-ink text-paper px-6 py-2 hover:bg-ink/90 transition-colors focus-within:ring-2 focus-within:ring-obligation focus-within:ring-offset-2 focus-within:ring-offset-paper">
-                <input type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, activeLeftTab === "B")} disabled={isUploading} />
+              <label htmlFor="main-upload" className="cursor-pointer bg-ink text-paper px-6 py-2 hover:bg-ink/90 transition-colors focus-within:ring-2 focus-within:ring-obligation focus-within:ring-offset-2 focus-within:ring-offset-paper rounded font-medium">
+                <input id="main-upload" type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, activeLeftTab === "B")} disabled={isUploading} aria-label={activeLeftTab === "A" ? "Upload Primary Document" : "Upload Comparison Document"} />
                 {isUploading ? "Parsing..." : "Select PDF"}
               </label>
             </div>
@@ -394,11 +394,11 @@ export default function Home() {
                       ) : (
                         <div className="bg-white/60 backdrop-blur-sm border border-ink/10 px-5 py-4 rounded-2xl rounded-bl-sm max-w-[95%] text-sm shadow-sm">
                           {msg.isLoading ? (
-                            <div className="flex items-center gap-2 text-ink/60 animate-pulse font-medium">
-                              <Search size={14} className="animate-bounce" /> Searching document...
+                            <div className="flex items-center gap-2 text-ink/60 animate-pulse font-medium" aria-live="polite">
+                              <Search size={14} className="animate-bounce" aria-hidden="true" /> <span role="status">Searching document...</span>
                             </div>
                           ) : msg.answer?.notFound ? (
-                            <div className="flex items-start gap-3 text-ink">
+                            <div className="flex items-start gap-3 text-ink" aria-live="polite">
                               <AlertCircle className="shrink-0 mt-0.5 text-risk" size={16} />
                               <div>
                                 <h3 className="font-medium text-risk mb-1 text-xs">Not Addressed in Document</h3>
@@ -437,6 +437,7 @@ export default function Home() {
               
               <form onSubmit={handleAsk} className="flex gap-3 mt-auto pt-4 border-t border-ink/10">
                 <div className="flex-1 relative">
+                  <label htmlFor="question" className="sr-only">Ask a question about the document</label>
                   <input 
                     id="question"
                     type="text" 
@@ -445,8 +446,9 @@ export default function Home() {
                     placeholder="Ask a question about Document A..."
                     className="w-full bg-transparent border-b-2 border-ink/20 py-3 pl-2 pr-10 focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-ink/40"
                     disabled={isAsking || docAChunks.length === 0}
+                    aria-invalid={!question.trim()}
                   />
-                  <Search className="absolute right-2 top-1/2 -translate-y-1/2 text-ink/40" size={20} />
+                  <Search className="absolute right-2 top-1/2 -translate-y-1/2 text-ink/40" size={20} aria-hidden="true" />
                 </div>
                 <button 
                   type="submit" 
@@ -470,12 +472,13 @@ export default function Home() {
                 <button 
                   onClick={handleScan}
                   disabled={isScanning || docAChunks.length === 0}
-                  className="border-2 border-ink text-ink px-6 py-3 font-medium hover:bg-ink hover:text-paper transition-colors disabled:opacity-50"
+                  className="border-2 border-ink text-ink px-6 py-3 font-medium hover:bg-ink hover:text-paper transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink rounded"
+                  aria-busy={isScanning}
                 >
                   {isScanning ? "Auditing Document..." : "Run Risk & Obligation Audit"}
                 </button>
               ) : (
-                <div className="space-y-6">
+                <div className="space-y-6" aria-live="polite">
                   {scanResult.flags.map((flag, idx) => (
                     <div key={idx} className="pb-4 border-b border-ink/10 last:border-0">
                       <div className="flex items-center gap-2 mb-2">
@@ -513,8 +516,8 @@ export default function Home() {
               {docBChunks.length === 0 ? (
                 <div className="p-6 border border-dashed border-ink/20 flex flex-col items-center justify-center gap-4 text-center">
                   <p className="text-ink/60">Upload a second document to enable comparison.</p>
-                  <label className="cursor-pointer border-2 border-ink text-ink px-6 py-2 hover:bg-ink hover:text-paper transition-colors font-medium">
-                    <input type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, true)} disabled={isUploading} />
+                  <label htmlFor="upload-doc-b" className="cursor-pointer border-2 border-ink text-ink px-6 py-2 hover:bg-ink hover:text-paper transition-colors font-medium focus-within:ring-2 focus-within:ring-ink rounded">
+                    <input id="upload-doc-b" type="file" accept="application/pdf" className="sr-only" onChange={(e) => handleUpload(e, true)} disabled={isUploading} aria-label="Upload Document B for comparison" />
                     {isUploading ? "Uploading..." : "Upload Document B"}
                   </label>
                 </div>
@@ -522,12 +525,13 @@ export default function Home() {
                 <button 
                   onClick={handleCompare}
                   disabled={isComparing}
-                  className="border-2 border-ink text-ink px-6 py-3 font-medium hover:bg-ink hover:text-paper transition-colors disabled:opacity-50"
+                  className="border-2 border-ink text-ink px-6 py-3 font-medium hover:bg-ink hover:text-paper transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink rounded"
+                  aria-busy={isComparing}
                 >
                   {isComparing ? "Generating Diff..." : "Generate Clause Diff Table"}
                 </button>
               ) : (
-                <div className="space-y-6">
+                <div className="space-y-6" aria-live="polite">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b-2 border-ink/20">
@@ -612,14 +616,19 @@ export default function Home() {
 
       {/* SaaS Full Page Overlay */}
       {activeModal && (
-        <div className={`fixed inset-0 z-[100] bg-paper text-ink flex flex-col overflow-y-auto ${isClosing ? 'animate-slide-down-screen' : 'animate-slide-up-screen'}`}>
+        <div 
+          className={`fixed inset-0 z-[100] bg-paper text-ink flex flex-col overflow-y-auto ${isClosing ? 'animate-slide-down-screen' : 'animate-slide-up-screen'}`}
+          role="dialog" 
+          aria-modal="true" 
+          aria-labelledby="modal-title"
+        >
           {/* Header */}
           <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-md border-b border-ink/10 px-6 py-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-ink text-paper p-2 rounded-lg shadow-sm">
+              <div className="bg-ink text-paper p-2 rounded-lg shadow-sm" aria-hidden="true">
                 <Scale size={24} className="animate-pulse" />
               </div>
-              <h2 className="text-2xl font-black text-ink tracking-tight">
+              <h2 id="modal-title" className="text-2xl font-black text-ink tracking-tight">
                 {activeModal === "FEATURES" && "Platform Features"}
                 {activeModal === "PRICING" && "Great Pricing Plans"}
                 {activeModal === "ENTERPRISE" && "Scale to Enterprise"}
@@ -627,8 +636,8 @@ export default function Home() {
                 {activeModal === "LOGIN" && "Workspace"}
               </h2>
             </div>
-            <button onClick={closeModal} className="p-3 bg-ink/5 hover:bg-ink/10 rounded-full transition-colors flex items-center gap-2 font-bold text-ink/70 hover:text-ink">
-              Close <X size={20} />
+            <button onClick={closeModal} aria-label="Close modal" className="p-3 bg-ink/5 hover:bg-ink/10 rounded-full transition-colors flex items-center gap-2 font-bold text-ink/70 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink">
+              Close <X size={20} aria-hidden="true" />
             </button>
           </div>
           

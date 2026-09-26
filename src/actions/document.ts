@@ -15,6 +15,13 @@ const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
 // Security: Max question length to prevent prompt injection
 const MAX_QUESTION_LENGTH = 2000;
 
+/**
+ * Processes an uploaded PDF document, extracting its text into chunks.
+ * Handles validation, size limits, and basic security checks.
+ *
+ * @param formData - The FormData containing the 'file' to upload.
+ * @returns An object containing either the extracted DocumentChunks or an error message.
+ */
 export async function processUploadedDocument(
   formData: FormData
 ): Promise<{ chunks: DocumentChunk[]; error?: string }> {
@@ -60,6 +67,14 @@ export async function processUploadedDocument(
   }
 }
 
+/**
+ * Queries the Gemini AI model with a question bounded strictly to the provided document chunks.
+ * Enforces maximum question length to mitigate prompt injection.
+ *
+ * @param question - The user's question about the document.
+ * @param chunks - The document chunks to use as context.
+ * @returns An object containing the GroundedAnswer or an error message.
+ */
 export async function askQuestion(
   question: string,
   chunks: DocumentChunk[]
@@ -88,6 +103,13 @@ export async function askQuestion(
   }
 }
 
+/**
+ * Scans the provided document chunks for potential legal risks, obligations, and inconsistencies.
+ * Uses the Gemini AI model to perform a strict legal audit.
+ *
+ * @param chunks - The document chunks to analyze.
+ * @returns An object containing the ScanResult or an error message.
+ */
 export async function scanDocument(
   chunks: DocumentChunk[]
 ): Promise<{ result: ScanResult | null; error?: string }> {
@@ -103,6 +125,13 @@ export async function scanDocument(
   }
 }
 
+/**
+ * Compares two sets of document chunks to identify added, removed, or changed clauses.
+ *
+ * @param chunksA - The baseline document chunks (Document A).
+ * @param chunksB - The new document chunks (Document B).
+ * @returns An object containing the CompareResult diff or an error message.
+ */
 export async function compareDocs(
   chunksA: DocumentChunk[],
   chunksB: DocumentChunk[]

@@ -6,9 +6,9 @@ jest.mock('@google/genai', () => {
   return {
     GoogleGenAI: jest.fn().mockImplementation(() => {
       return {
-        interactions: {
-          create: jest.fn().mockResolvedValue({
-            output_text: JSON.stringify({
+        models: {
+          generateContent: jest.fn().mockResolvedValue({
+            text: JSON.stringify({
               notFound: true
             })
           })
@@ -46,16 +46,16 @@ describe('Gemini SDK Abstraction Tests', () => {
 
   it('scanDocumentForRisks parses json successfully', async () => {
     // Override the mock for this specific test
-    const mockCreate = jest.fn().mockResolvedValue({
-      output_text: JSON.stringify({
+    const mockGenerate = jest.fn().mockResolvedValue({
+      text: JSON.stringify({
         flags: [{ type: "RISK", title: "Test", snippet: "Test", description: "Test", chunkId: "1" }],
         summary: "Risk found"
       })
     });
     
     (GoogleGenAI as jest.Mock).mockImplementation(() => ({
-      interactions: {
-        create: mockCreate
+      models: {
+        generateContent: mockGenerate
       }
     }));
 

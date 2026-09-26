@@ -106,13 +106,13 @@ Respond ONLY with valid JSON:
 {"answer": "string", "citedChunkId": "string", "confidence": "HIGH|MEDIUM|LOW", "notFound": boolean}`;
 
   const result = await executeWithRetry(() =>
-    ai.interactions.create({
-      model: "gemini-3.8-flash",
-      input: prompt,
+    ai.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: prompt,
     })
   );
 
-  const raw = result.output_text ?? "";
+  const raw = result.text ?? "";
   const jsonMatch = raw.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("No JSON in response");
   const parsed = JSON.parse(jsonMatch[0]);
@@ -163,13 +163,13 @@ Respond ONLY with valid JSON:
 {"flags": [{"type": "RISK|OBLIGATION|INCONSISTENCY", "chunkId": "string", "description": "string"}]}`;
 
   const result = await executeWithRetry(() =>
-    ai.interactions.create({
-      model: "gemini-3.8-flash",
-      input: prompt,
+    ai.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: prompt,
     })
   );
 
-  const raw = result.output_text ?? "";
+  const raw = result.text ?? "";
   const jsonMatch = raw.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("No JSON in response");
   const parsed = JSON.parse(jsonMatch[0]);
@@ -229,13 +229,13 @@ Respond ONLY with valid JSON:
 {"diffs": [{"clauseAId": "string", "clauseBId": "string", "status": "ADDED|REMOVED|CHANGED", "description": "string"}]}`;
 
   const result = await executeWithRetry(() =>
-    ai.interactions.create({
-      model: "gemini-3.8-flash",
-      input: prompt,
+    ai.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: prompt,
     })
   );
 
-  const raw = result.output_text ?? "";
+  const raw = result.text ?? "";
   const jsonMatch = raw.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("No JSON in response");
   const parsed = JSON.parse(jsonMatch[0]);
